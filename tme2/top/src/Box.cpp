@@ -1,59 +1,28 @@
 #include <Box.h>
 
+size_t Box::count = 0;
+
 Box::Box():x1_(1), y1_(1), x2_(0), y2_(0), name_("noname")
-{}
+{
+    count++;
+}
 
 Box::Box( const std::string name, long x1, long y1, long x2, long y2)
         : x1_(x1), y1_(y1), x2_(x2), y2_(y2), name_(name)
-{}
+{
+    count++;
+}
 
 Box::Box(const Box& other): x1_(other.x1_), y1_(other.y1_)
                             ,x2_(other.x2_), y2_(other.y2_)
                             , name_(other.name_+"_c")
-{}
+{
+    count++;
+}
 
 Box::~Box()
 {}
 
-std::string Box::getName()
-{
-    return name_;
-}
-
-long Box::getX1()
-{
-    return x1_;
-}
-
-long Box::getX2()
-{
-    return x2_;
-}
-
-long Box::getY1()
-{
-    return y1_;
-}
-
-long Box::getY2()
-{
-    return y2_;
-}
-
-long Box::getWidth()
-{
-    return (x2_ - x1_);
-}
-
-long Box::getHeight()
-{
-    return (y2_ - y1_);
-}
-
-bool Box::isEmpty() const
-{
-    return (x1_ > x2_);
-}
 
 bool Box::intersect(const Box& other) const
 {

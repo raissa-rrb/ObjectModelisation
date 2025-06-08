@@ -15,6 +15,7 @@ int main()
 {
     Box b0;
     Box b1 ("b1", 16, 16, 30, 20);
+ 
     
     testFunction(b1);
 
