@@ -1,5 +1,7 @@
 #include <vector>
-#include <algorithm>
+#include <list>
+#include <map>
+#include <algorithm> //to sort the vector
 #include <string>
 #include <iostream>
 
@@ -100,37 +102,139 @@ namespace vector_bench {
             cout << vec[i] << " ";
         }
         cout << endl;
-
     }
-
 }
 
 namespace list_bench {
 
-    void back_insert(){
+    void backInsert(){
 
+        const char ** data = GPL_2_text;
+        list<string> list;
+
+        //insert words in list
+        while(*data != NULL)
+        {
+            list.push_back(*data);
+            data++;
+        }
+
+        //print nb of elements in list
+        cout << "list contains " << list.size() << endl;
+
+        //sort list elmts
+        list.sort();
+
+        //print elmnts
+        for(string s : list)
+            cout << s << " ";
+        cout << endl;
     }
 
-    void front_insert(){
+    //list contains a push front method actually
+    void frontInsert(){
+        const char ** data = GPL_2_text;
+        list<string> list;
 
+        while(*data != NULL)
+        {
+            list.push_front(*data);
+            data++;
+        }
+
+        //print nb of elements in list
+        cout << "list contains " << list.size() << endl;
+
+        //sort list elmts
+        list.sort();
+
+        //print elmnts
+        for(string s : list)
+            cout << s << " ";
+        cout << endl;
     }
 
     void sortEachInsert(){
+
+        const char ** data = GPL_2_text;
+        list<string> list;
+
+        while(*data != NULL)
+        {
+            list.push_back(*data);
+
+            //sort after each insert
+            list.sort();
+
+            data++;
+        }
+
+        //print nb of elements in list
+        cout << "list contains " << list.size() << endl;
+
+        //print elmnts
+        for(string s : list)
+            cout << s << " ";
+        cout << endl;
+
         
     }
 }
 
 namespace map_bench{
+/* map will be used to count how many times a word appears
+    here's the algorithm
 
-    void back_insert(){
+        //check if word in map 
+            //if yes
+                //increment word counter
+            //if not 
+                //add word
+        // print nb of elmts
+        // calcultate total nb of words 
 
-    }
+regarding the insertion, i coudl've checked with contains(key) if the word was in the map
+but actually contains(key) does the same (checks if the word is there) and if it is it directly 
+returns the iterator which will enable me to increment the key's counter.
+*/
+    void insertAndCount()
+    {
+        const char ** data = GPL_2_text;
+        map<string, int> mymap;
 
-    void front_insert(){
+        //insert
+        while(*data != NULL)
+        {       
+            map<string, int>::iterator it_found = mymap.find(*data);
+            if(it_found != mymap.end())
+            {   
+                it_found->second++;
+            } else {
+                mymap.insert({*data,1});
+            }
+            data++;
+        }
 
-    }
+        // print nb of elmts
+        cout << "map contains " <<  mymap.size() << " words" << endl;
 
-    void sortEachInsert(){
-        
+        // display all elmts count + words " "
+        map<string,int>::iterator itCur = mymap.begin();
+
+        for(; itCur != mymap.end() ; itCur++)
+        {
+            cout << itCur->first << " " << itCur->second << " ¦ " ;
+        }
+        cout << endl;
+
+        // calcultate total nb of words 
+        size_t sum = 0;
+        for(itCur = mymap.begin(); itCur != mymap.end() ; itCur++)
+        {
+            sum += itCur->second  ;
+        }
+
+        cout << "total number of words is " << sum << endl;
+
     }
 }
