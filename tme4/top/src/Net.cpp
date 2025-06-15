@@ -6,7 +6,9 @@
 
 namespace Netlist {
 
-    Net::Net    ( Cell*, const std::string&, Term::Type ){}
+    Net::Net    ( Cell* owner, const std::string& name, Term::Type type):
+                owner_(owner), name_(name), type_(type), nodes_()
+    {}
     Net::~Net    (){}
 
     Cell*                       Net::getCell         () const{}

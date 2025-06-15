@@ -14,7 +14,7 @@ namespace Netlist {
     class Net {
     public:
 
-     Net    ( Cell*, const std::string&, Term::Type );
+     Net    ( Cell*, const std::string& name, Term::Type type );
     ~Net    ();
 
     Cell*                       getCell         () const;
