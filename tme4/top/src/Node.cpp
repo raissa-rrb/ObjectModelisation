@@ -30,6 +30,16 @@ namespace Netlist {
 
   inline Net* Node::getNet () const { return term_->getNet(); }
 
+  void                Node::toXml              (std::ostream& o) const
+  {
+
+    o << indent << "<node term=\"" << term_->getName()   ;  
+    if(term_->isInternal())
+      term_->toXml(o) ; 
+    o <<  "\" id=\"" << id_ 
+    <<"\" x=\"" << position_.getX() << "\" y=\"" << position_.getY() << "\"/>" << std::endl;
+  
+  }
 
 // Node::toXml() Ã  Ã©crire ici.
 

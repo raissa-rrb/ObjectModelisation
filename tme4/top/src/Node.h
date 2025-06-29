@@ -28,9 +28,12 @@ namespace Netlist {
               Net*    getNet      () const;
       inline  Term*   getTerm     () const;
       inline  void    setId       ( size_t );
+      void                toXml              (std::ostream&) const;
+
     private:
                       Node        ( const Node& );
               Node&   operator=   ( const Node& );
+             
     protected:
       size_t  id_;
       Term*   term_;

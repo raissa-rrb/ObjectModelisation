@@ -20,12 +20,13 @@ namespace Netlist {
     Cell*                       getCell         () const;
     const std::string&          getName         () const;
     unsigned int                getId           () const;
-    Term::Type                        getType         () const;
+    Term::Type                  getType         () const;
     const std::vector<Node*>&   getNodes        () const;
     size_t                      getFreeNodeId   () const;
 
     void                        add             ( Node * );
     bool                        remove          ( Node* );
+    void                toXml              (std::ostream&) const;
 
     private:
 

@@ -161,7 +161,44 @@ namespace Netlist {
   { return maxNetIds_++; }
 
 
-  // Cell::toXml() Ã  Ã©crire ici...
+  void Cell::toXml(std::ostream& o ) const
+  {
+    
+    o << "<?xml version=\"1.0\"?>" << std::endl;
+    o << "<cell name=\"" << name_ << "\">" << std::endl;
+
+    //call terms toXml()
+
+    o << ++indent << "<terms>" << endl;
+   ++indent;
+    
+    for(Term* t : terms_)
+      t->toXml(o);
+
+    o  << --indent << "</terms>" << endl;     
+    
+    o << indent << "<instances>" << endl;
+    ++indent;
+    
+    for(Instance* i : instances_)
+      i->toXml(o);
+
+    o << --indent << "</instances>" << endl;     
+
+
+    o << indent << "<nets>" << endl;
+    ++indent;
+    
+    for(Net* n : nets_)
+      n->toXml(o);
+
+    o << --indent << "</nets>" << endl;   
+    
+    indent--;
+
+    o << "</cell>" << endl;
+
+  }
 
 
 }  // Netlist namespace.

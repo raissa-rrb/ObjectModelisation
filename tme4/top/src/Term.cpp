@@ -17,39 +17,92 @@ which means it's not associated to a net yet
 */
 
 namespace Netlist {
-
-
         
-        Term::Term    ( Cell* owner, const std::string& name, Term::Direction direction):
-                        owner_(owner), name_(name),direction_(direction), net_(nullptr), node_(nullptr)
-                        
+
+    Term::Term    ( Cell* owner, const std::string& name, Term::Direction direction):
+                owner_(owner), name_(name),direction_(direction), net_(nullptr), node_(this, Node::noid), type_(External)                      
+    {
+		// the term has to be added to the Cell's terms list
+        owner->add(this);
+    }
+
+    /*in the case of an instance terminal, the instance's model's term has to be duplicated*/
+    Term::Term    ( Instance* instance, const Term* modelTerm) : 
+                    owner_(instance), name_(modelTerm->getName()), direction_(modelTerm->getDirection())
+                    , net_(modelTerm->getNet()), node_(this, Node::noid), type_(Internal)
+    {
+        // the term has to be added to the instance's terms list
+        instance->add(this);
+    }
+
+    Term::~Term   (){}
+
+    std::string                         Term::toString        (Type type)
+    {
+        return (type == External) ? "External" : "Internal";
+    }
+    std::string                         Term::toString        (Term::Direction direction)  
+    {
+        switch (direction)
         {
-                
+        case 1:
+            return "In";
+                    
+        case 2:
+            return "Out";
+            
+        case 3:
+            return "Inout";
+                    
+        case 4:
+            return "Tristate";
+        
+        case 5 :
+            return "Transc";
+                    
+        default :
+            return "Unknown";
+        
         }
-        Term::Term    ( Instance* instance, const Term* modelTerm){}
-        Term::~Term   (){}
+    }
+    Term::Direction                     Term::toDirection     (std::string){}
 
-        std::string                         Term::toString        (Type){}
-        std::string                         Term::toString        (Term::Direction)  {}
-        Term::Direction                     Term::toDriection     (std::string){}
+     
+    Cell*                       Term::getOwnerCell    () const
+    { return (type_ == External) ? static_cast<Cell*>(owner_) : static_cast<Instance*>(owner_)->getCell();}
+     
+    void                        Term::setNet          ( Net* net)              
+    {
+        if(!net && net_)
+            net_ = NULL;
+            else {
+                net_ = net;
+                                                                             
+                net->add(&node_);
+            }
+    }
+ 
+	void                        Term::setNet          ( const std::string& name)
+    {
+        setNet(getOwnerCell()->getNet(name));
+               
+    }
 
-        inline  bool                        Term::isInternal      () const{}
-        inline  bool                        Term::isExternal      () const{}
-        inline  const std::string&          Term::getName         () const{}        
-        inline  Node*                       Term::getNode         () {}
-        inline  Net*                        Term::getNet          () const{}
-        inline  Cell*                       Term::getCell         () const{}
-                Cell*                       Term::getOwnerCell    () const{}
-        inline  Instance*                   Term::getInstance     () const{}
-        inline  Term::Direction             Term::getDirection    () const{}
-        inline  Point                       Term::getPosition     () const{}
-        inline  Term::Type                  Term::getType         () const{}
+    void                        Term::setPosition     ( const Point& )      {}
+    void                        Term::setPosition     ( int x, int y )      {}
 
-                void                        Term::setNet          ( Net* )              {}
-                void                        Term::setNet          ( const std::string& ){}
-        inline  void                        Term::setDirection    ( Direction )         {}
-                void                        Term::setPosition     ( const Point& )      {}
-                void                        Term::setPosition     ( int x, int y )      {}
+    void                Term::toXml              (std::ostream& o) const 
+    {
+        if(isExternal()) 
+        {
+            o << indent <<  "<term name=\"" << name_ 
+            << "\" direction=\"" << toString(direction_) << "\"/>" << std::endl;
+        }
+        else
+        {
+            o  << "\" instance=\"" << getInstance()->getName();
+        } 
+    }
 
 }
 

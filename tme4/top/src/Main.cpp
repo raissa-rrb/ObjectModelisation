@@ -52,6 +52,7 @@ int main ( int argc, char* argv[] )
   halfadder->connect( "b"   , ha_b    );
   halfadder->connect( "sout", ha_sout );
   halfadder->connect( "cout", ha_cout );
+  
   ha_xor2->connect( "i0", ha_a    );
   ha_xor2->connect( "i1", ha_b    );
   ha_xor2->connect(  "q", ha_sout );
@@ -59,6 +60,8 @@ int main ( int argc, char* argv[] )
   ha_and2->connect( "i1", ha_b    );
   ha_and2->connect(  "q", ha_cout );
   halfadder->toXml( cout );
+
+    cout << "\n all good" << endl;
 
   return 0;
 }
