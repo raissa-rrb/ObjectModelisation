@@ -14,3 +14,10 @@ Notions covered:
 - forward declarations, #pragma_once
 - xml parser
 - pointers and references
+
+**update 29/06**
+- implemented most functions
+ - TODO : DTOR and remove() functions
+- implemented xml format print
+
+- **coming up** : xml parser to load files  
