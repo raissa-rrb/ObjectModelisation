@@ -15,6 +15,7 @@ Notions covered:
 - xml parser
 - pointers and references
 
+<<<<<<< HEAD
 ### TME45
 In TME 45 most functions are implemented (except remove() and DTOR that I'll lasave for the end and all functions related to the object position because it's not used yet).
 
@@ -34,3 +35,11 @@ Before getting to the part that might be confusing, let's start easy and connect
 Once that's done, we can connect the internal nets with the instanciated cells, like halfadder1's cout output to halfadder2's b input using the sout_1 net.
 
 And we're done. 
+=======
+**update 29/06**
+- implemented most functions
+ - TODO : DTOR and remove() functions
+- implemented xml format print
+
+- **coming up** : xml parser to load files  
+>>>>>>> c104be90e027d7527276e6a19b8ef7837fa1dd81
