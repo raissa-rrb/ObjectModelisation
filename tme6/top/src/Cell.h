@@ -6,6 +6,8 @@
 #include <string>
 #include <vector>
 #include "Indentation.h"
+#include <libxml/xmlreader.h>
+#include "XmlUtil.h"
 
 namespace Netlist {
 
@@ -37,7 +39,10 @@ namespace Netlist {
                    void                    remove            ( Net* );
                    bool                    connect           ( const std::string& name, Net* net );
                    unsigned int            newNetId          ();
-                  void                toXml              (std::ostream&) const;
+                   void                     toXml              (std::ostream&) const;
+                   static Cell*                    fromXml( xmlTextReaderPtr reader);
+                  static Cell* load ( const std::string& cellName );
+                    void save () const;
     private:
       static  std::vector<Cell*>      cells_;
               std::string             name_;

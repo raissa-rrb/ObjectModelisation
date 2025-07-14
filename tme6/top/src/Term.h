@@ -4,6 +4,9 @@
 #include <string>
 #include "Point.h"
 #include "Node.h"
+#include <libxml/xmlreader.h>
+#include "XmlUtil.h"
+
 
 namespace Netlist {
 
@@ -49,6 +52,7 @@ namespace Netlist {
                 void                    setPosition     ( int x, int y );
 
                 void                toXml              (std::ostream&) const;
+                static Term*               fromXml(Cell*, xmlTextReaderPtr);
 
         private:
 

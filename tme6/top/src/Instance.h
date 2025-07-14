@@ -3,6 +3,8 @@
 
 #include <string>
 #include <vector>
+#include <libxml/xmlreader.h>
+#include "XmlUtil.h"
 
 namespace Netlist {
 
@@ -31,6 +33,9 @@ namespace Netlist {
     void                        setPosition     ( int x, int y );
 
     void                toXml              (std::ostream&) const;
+    static Instance* fromXml(Cell*, xmlTextReaderPtr){
+        std::cout << "net from XML" << std::endl;
+    }
 
 
     private:

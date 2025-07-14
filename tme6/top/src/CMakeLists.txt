@@ -26,6 +26,7 @@ include_directories( ${SCHEMATIC_SOURCE_DIR} ${LIBXML2_INCLUDE_DIR})
                                       Point.h
                                       Node.h
                                       Cell.h
+                                      XmlUtil.h
                        )
 
                     set( cpps         Indentation.cpp
@@ -36,6 +37,7 @@ include_directories( ${SCHEMATIC_SOURCE_DIR} ${LIBXML2_INCLUDE_DIR})
                                       Node.cpp
                                       Cell.cpp
                                       Main.cpp
+                                      XmlUtil.cpp
                        )
 
         add_executable ( tme6        ${cpps} )

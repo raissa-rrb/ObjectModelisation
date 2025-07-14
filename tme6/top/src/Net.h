@@ -4,6 +4,9 @@
 #include <string>
 #include <vector>
 #include "Term.h"
+#include <libxml/xmlreader.h>
+#include "XmlUtil.h"
+
 
 
 namespace Netlist {
@@ -27,6 +30,9 @@ namespace Netlist {
     void                        add             ( Node * );
     bool                        remove          ( Node* );
     void                toXml              (std::ostream&) const;
+    static Net* fromXml(Cell*, xmlTextReaderPtr){ 
+        std::cout << "net from XML" << std::endl;
+    }
 
     private:
 
