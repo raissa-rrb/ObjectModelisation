@@ -109,41 +109,15 @@ namespace Netlist {
     {
         
         Term* term ;
-        while(xmlTextReaderNodeType(reader) != XML_READER_TYPE_END_ELEMENT)
-        {
-            // int status = xmlTextReaderRead(reader);
-            // if (status != 1) {
-            //   if (status != 0) {
-            //     std::cerr << "[ERROR] Cell::fromXml(): Unexpected termination of the XML parser." << std::endl;
-            //   }
-            //   break;
-            // }
+        std::string termName = xmlCharToString( xmlTextReaderGetAttribute( reader, (const xmlChar*)"name" ) );
+        std::string termDirection = xmlCharToString( xmlTextReaderGetAttribute( reader, (const xmlChar*)"direction" ) );
 
-           // std::cout << "next " <<xmlTextReaderRead(reader) << std::endl; //next line
-        
-            switch ( xmlTextReaderNodeType(reader) ) {
-              case XML_READER_TYPE_COMMENT:
-              case XML_READER_TYPE_WHITESPACE:
-              case XML_READER_TYPE_SIGNIFICANT_WHITESPACE:
-                {std::cout << "here" << std::endl;
-                    xmlTextReaderRead(reader);
-                continue;}
-            }
-            
-            std::string termName = xmlCharToString( xmlTextReaderGetAttribute( reader, (const xmlChar*)"name" ) );
-            std::string termDirection = xmlCharToString( xmlTextReaderGetAttribute( reader, (const xmlChar*)"direction" ) );
+        std::cout << "got term " << termName << std::endl;
 
-            std::cout << "got term " << termName << std::endl;
-
-            if (not termName.empty())
-                 term = new Term(cell, termName, Term::toDirection(termDirection));
-            xmlTextReaderRead(reader);
-            }
-            //xmlTextReaderRead(reader);
-            std::cout << "leaving terms" << std::endl;
-
+        if (not termName.empty())
+               term = new Term(cell, termName, Term::toDirection(termDirection));
         return term;
-
+        
     }
 }
 

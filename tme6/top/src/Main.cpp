@@ -11,7 +11,10 @@ using namespace std;
 #include "Instance.h"
 #include "Cell.h"
 using namespace Netlist;
+#include <libxml/xmlreader.h>
 
+
+#include "XmlUtil.h"
 
 int main ( int argc, char* argv[] )
 {
@@ -128,8 +131,61 @@ int main ( int argc, char* argv[] )
 
   cout << "Chargement des modeles:" << endl;
   cout << "- <and2> ..." << endl;
-  Cell* and2 = Cell::load( "and2" );
-  and2->toXml(cout);
+  //Cell* and2 = Cell::load( "and2" );
+  //and2->toXml(cout);
+
+  Cell* halfadder = Cell::load( "halfadder" );
+  halfadder->toXml(cout);
+
+
+
+  // string           cellFile = "../work/cells/and2.xml";
+  // xmlTextReaderPtr reader;
+  
+  // reader = xmlNewTextReaderFilename( cellFile.c_str() );
+  // const xmlChar* cellTag      = xmlTextReaderConstString( reader, (const xmlChar*)"cell" );
+  //   const xmlChar* netsTag      = xmlTextReaderConstString( reader, (const xmlChar*)"nets" );
+  //   const xmlChar* termsTag     = xmlTextReaderConstString( reader, (const xmlChar*)"terms" );
+  //   const xmlChar* instancesTag = xmlTextReaderConstString( reader, (const xmlChar*)"instances" );
+  
+
+  // while ( true ) {
+  //   int status = xmlTextReaderRead(reader);
+  //   if (status != 1) {
+  //     if (status != 0) {
+  //       cerr << "[ERROR] Cell::fromXml(): Unexpected termination of the XML parser." << endl;
+  //     }
+  //     break;
+  //   }
+  //   switch ( xmlTextReaderNodeType(reader) ) {
+  //     case XML_READER_TYPE_COMMENT:
+  //     case XML_READER_TYPE_WHITESPACE:
+  //     case XML_READER_TYPE_SIGNIFICANT_WHITESPACE:
+  //       std::cout << "switch cell"<<std::endl;
+  //       continue;
+  //   }
+
+  //    const xmlChar* nodeName = xmlTextReaderConstLocalName( reader );
+
+  //    if(nodeName == cellTag)
+  //     cout << "cell"<< endl;
+
+  //     if(nodeName == instancesTag)
+  //     cout << "instance"<< endl;
+        
+  //     if(nodeName == instancesTag and (xmlTextReaderNodeType(reader) == XML_READER_TYPE_END_ELEMENT) )
+  //     cout << "instance end"<< endl;
+
+  //     if(nodeName == netsTag)
+  //     cout << "net"<< endl;
+
+  //     if(nodeName == termsTag and  (xmlTextReaderNodeType(reader) != XML_READER_TYPE_END_ELEMENT) )
+  //     cout << "terms"<< endl;
+
+  //     if(nodeName == termsTag and (xmlTextReaderNodeType(reader) == XML_READER_TYPE_END_ELEMENT) )
+  //     cout << "terms end"<< endl;
+
+  // }
   
 
   return 0;

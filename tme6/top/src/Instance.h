@@ -33,9 +33,7 @@ namespace Netlist {
     void                        setPosition     ( int x, int y );
 
     void                toXml              (std::ostream&) const;
-    static Instance* fromXml(Cell*, xmlTextReaderPtr){
-        std::cout << "net from XML" << std::endl;
-    }
+    static Instance* fromXml(Cell*, xmlTextReaderPtr);
 
 
     private:

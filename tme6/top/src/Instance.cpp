@@ -82,4 +82,16 @@ namespace Netlist {
     
     }
 
+     Instance* Instance::fromXml(Cell* cell, xmlTextReaderPtr reader)
+     {
+        Instance* newInstance ;
+        std::string InstName = xmlCharToString( xmlTextReaderGetAttribute( reader, (const xmlChar*)"name" ) );
+       
+        std::cout << "got instance " << InstName << std::endl;
+
+        if (not InstName.empty())
+               newInstance = new Instance(cell, cell, InstName);
+        return newInstance;
+     }
+
 }

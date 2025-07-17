@@ -95,6 +95,18 @@ namespace Netlist {
     
     }
 
+    Net* Net::fromXml(Cell* cell, xmlTextReaderPtr reader)
+    {
+        Net* newNet ;
+        std::string netName = xmlCharToString( xmlTextReaderGetAttribute( reader, (const xmlChar*)"name" ) );
+       
+        std::cout << "got instance " << netName << std::endl;
+
+        if (not netName.empty())
+               newNet = new Net(cell, netName,Term::Internal);
+        return newNet;
+    }
+
 
 
 
